@@ -1,6 +1,5 @@
-// HomeScreen.js
 import React from "react";
-import { View, StyleSheet, TouchableOpacity } from "react-native";
+import { View, StyleSheet, TouchableOpacity, Text } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 
 export default function HomeScreen({ navigation }) {
@@ -13,31 +12,33 @@ export default function HomeScreen({ navigation }) {
     // Navigate to the Statement screen
     navigation.navigate("Statement");
   };
-  const handleNavigateToHome = () => {
-    // Navigate to the Statement screen
-    navigation.navigate("Home");
-  };
+
+  // No need for handleNavigateToHome as it navigates to the current screen
+
   return (
     <View style={styles.container}>
       {/* Main content of the home screen */}
+      <Text style={styles.heading}>Utibu Health</Text>
       {/* Add your main content here */}
+      {/* For demonstration, let's add a welcome message */}
+      <Text style={styles.welcomeMessage}>Welcome to Utibu Health!</Text>
 
       {/* Bottom navigation icons */}
       <View style={styles.bottomNavigation}>
         <TouchableOpacity
-          onPress={handleNavigateToHome}
+          onPress={() => navigation.navigate("Home")}
           style={styles.iconContainer}
         >
           <AntDesign name="home" size={30} color="black" />
         </TouchableOpacity>
         <TouchableOpacity
-          onPress={handleNavigateToOrder}
+          onPress={() => navigation.navigate("Order")}
           style={styles.iconContainer}
         >
           <AntDesign name="shoppingcart" size={30} color="black" />
         </TouchableOpacity>
         <TouchableOpacity
-          onPress={handleNavigateToStatement}
+          onPress={() => navigation.navigate("Statement")}
           style={styles.iconContainer}
         >
           <AntDesign name="filetext1" size={30} color="black" />
@@ -54,18 +55,33 @@ const styles = StyleSheet.create({
     alignItems: "center",
     backgroundColor: "#fff",
   },
+  heading: {
+    fontSize: 24,
+    fontWeight: "bold",
+    marginBottom: 20,
+  },
+  welcomeMessage: {
+    fontSize: 18,
+    marginBottom: 40,
+  },
   bottomNavigation: {
-    flexDirection: "row",
-    justifyContent: "space-around",
-    alignItems: "center",
-    width: "100%",
     position: "absolute",
     bottom: 0,
-    backgroundColor: "#fff", // Change the background color as needed
-    elevation: 8, // Add elevation for Android shadow effect
+    left: 0, // Ensure it starts from the left edge
+    right: 0, // Ensure it ends at the right edge
+    backgroundColor: "grey",
+    flexDirection: "row",
+    justifyContent: "space-between", // Space out the icons evenly
+    alignItems: "center",
+    elevation: 8,
+    paddingHorizontal: 20, // Add horizontal padding for space around icons
     paddingVertical: 10,
   },
   iconContainer: {
     alignItems: "center",
+  },
+  iconText: {
+    fontSize: 12,
+    marginTop: 5,
   },
 });

@@ -1,32 +1,43 @@
-import React, { useState } from "react";
-import {
-  View,
-  Text,
-  TextInput,
-  Button,
-  StyleSheet,
-  TouchableOpacity,
-} from "react-native";
+import React from "react";
+import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 
 export default function StatementScreen({ navigation }) {
+  // Dummy data for demonstration
+  const orders = [
+    { id: 1, medication: "Medication A", quantity: 2, date: "2024-03-01" },
+    { id: 2, medication: "Medication B", quantity: 3, date: "2024-03-05" },
+    { id: 3, medication: "Medication C", quantity: 1, date: "2024-03-10" },
+  ];
+
   const handleNavigateToOrder = () => {
-    // Navigate to the Order screen
     navigation.navigate("Order");
   };
 
   const handleNavigateToStatement = () => {
-    // Navigate to the Statement screen
     navigation.navigate("Statement");
   };
+
   const handleNavigateToHome = () => {
-    // Navigate to the Statement screen
     navigation.navigate("Home");
   };
+
   return (
     <View style={styles.container}>
-      {/* Main content of the home screen */}
-      {/* Add your main content here */}
+      {/* Statement Header */}
+      <Text style={styles.heading}>Order History</Text>
+
+      {/* List of Orders */}
+      <View style={styles.orderList}>
+        {orders.map((order) => (
+          <View key={order.id} style={styles.orderItem}>
+            <Text style={styles.orderItemText}>
+              {order.medication} - Qty: {order.quantity}
+            </Text>
+            <Text style={styles.orderItemText}>Date: {order.date}</Text>
+          </View>
+        ))}
+      </View>
 
       {/* Bottom navigation icons */}
       <View style={styles.bottomNavigation}>
@@ -56,21 +67,42 @@ export default function StatementScreen({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
     backgroundColor: "#fff",
+    paddingHorizontal: 20,
+    paddingTop: 20,
+  },
+  heading: {
+    fontSize: 24,
+    fontWeight: "bold",
+    marginBottom: 20,
+  },
+  orderList: {
+    marginBottom: 20,
+  },
+  orderItem: {
+    borderWidth: 1,
+    borderColor: "#ccc",
+    borderRadius: 5,
+    padding: 10,
+    marginBottom: 10,
+  },
+  orderItemText: {
+    fontSize: 16,
   },
   bottomNavigation: {
-    flexDirection: "row",
-    justifyContent: "space-around",
-    alignItems: "center",
-    width: "100%",
     position: "absolute",
     bottom: 0,
-    backgroundColor: "#fff", // Change the background color as needed
-    elevation: 8, // Add elevation for Android shadow effect
+    left: 0, // Ensure it starts from the left edge
+    right: 0, // Ensure it ends at the right edge
+    backgroundColor: "grey",
+    flexDirection: "row",
+    justifyContent: "space-between", // Space out the icons evenly
+    alignItems: "center",
+    elevation: 8,
+    paddingHorizontal: 20, // Add horizontal padding for space around icons
     paddingVertical: 10,
   },
+
   iconContainer: {
     alignItems: "center",
   },

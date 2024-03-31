@@ -10,41 +10,67 @@ import {
 import { AntDesign } from "@expo/vector-icons";
 
 export default function OrderMedicationScreen({ navigation }) {
-  const handleNavigateToOrder = () => {
-    // Navigate to the Order screen
-    navigation.navigate("Order");
-  };
+  const [medication, setMedication] = useState("");
+  const [quantity, setQuantity] = useState("");
+  const [notes, setNotes] = useState("");
 
-  const handleNavigateToStatement = () => {
-    // Navigate to the Statement screen
-    navigation.navigate("Statement");
-  };
-  const handleNavigateToHome = () => {
-    // Navigate to the Statement screen
-    navigation.navigate("Home");
+  const handleOrder = () => {
+    // Logic to handle the order submission
+    // You can implement this based on your requirements
+    // This function will navigate to the confirmation screen after order submission
+    navigation.navigate("OrderConfirmation");
   };
 
   return (
     <View style={styles.container}>
-      {/* Main content of the home screen */}
-      {/* Add your main content here */}
+      {/* Medication Selection */}
+      <Text style={styles.label}>Medication:</Text>
+      <TextInput
+        style={styles.input}
+        value={medication}
+        onChangeText={(text) => setMedication(text)}
+        placeholder="Enter medication name"
+      />
+
+      {/* Quantity */}
+      <Text style={styles.label}>Quantity:</Text>
+      <TextInput
+        style={styles.input}
+        value={quantity}
+        onChangeText={(text) => setQuantity(text)}
+        placeholder="Enter quantity"
+        keyboardType="numeric"
+      />
+
+      {/* Additional Notes */}
+      <Text style={styles.label}>Additional Notes:</Text>
+      <TextInput
+        style={[styles.input, { height: 100 }]}
+        value={notes}
+        onChangeText={(text) => setNotes(text)}
+        placeholder="Enter any additional notes"
+        multiline
+      />
+
+      {/* Order Button */}
+      <Button title="Place Order" onPress={handleOrder} />
 
       {/* Bottom navigation icons */}
       <View style={styles.bottomNavigation}>
         <TouchableOpacity
-          onPress={handleNavigateToHome}
+          onPress={() => navigation.navigate("Home")}
           style={styles.iconContainer}
         >
           <AntDesign name="home" size={30} color="black" />
         </TouchableOpacity>
         <TouchableOpacity
-          onPress={handleNavigateToOrder}
+          onPress={() => navigation.navigate("Order")}
           style={styles.iconContainer}
         >
           <AntDesign name="shoppingcart" size={30} color="black" />
         </TouchableOpacity>
         <TouchableOpacity
-          onPress={handleNavigateToStatement}
+          onPress={() => navigation.navigate("Statement")}
           style={styles.iconContainer}
         >
           <AntDesign name="filetext1" size={30} color="black" />
@@ -60,16 +86,32 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: "#fff",
+    padding: 20,
+  },
+  label: {
+    fontSize: 16,
+    fontWeight: "bold",
+    marginBottom: 5,
+  },
+  input: {
+    borderWidth: 1,
+    borderColor: "#ccc",
+    borderRadius: 5,
+    padding: 10,
+    marginBottom: 20,
+    width: "100%",
   },
   bottomNavigation: {
-    flexDirection: "row",
-    justifyContent: "space-around",
-    alignItems: "center",
-    width: "100%",
     position: "absolute",
     bottom: 0,
-    backgroundColor: "#fff", // Change the background color as needed
-    elevation: 8, // Add elevation for Android shadow effect
+    left: 0, // Ensure it starts from the left edge
+    right: 0, // Ensure it ends at the right edge
+    backgroundColor: "grey",
+    flexDirection: "row",
+    justifyContent: "space-between", // Space out the icons evenly
+    alignItems: "center",
+    elevation: 8,
+    paddingHorizontal: 20, // Add horizontal padding for space around icons
     paddingVertical: 10,
   },
   iconContainer: {

@@ -1,12 +1,12 @@
-// config/database.js
 const { Sequelize } = require("sequelize");
 
-const sequelize = new Sequelize("database_name", "username", "password", {
+const sequelize = new Sequelize("users", "Kratos", "1234", { // Added comma here
   host: "localhost",
   dialect: "mssql",
   dialectOptions: {
     options: {
-      encrypt: true, // If you're connecting to Azure SQL Database, set this to true
+      // Use Windows Authentication
+      trustedConnection: true,
     },
   },
 });
